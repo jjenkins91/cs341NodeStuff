@@ -7,7 +7,8 @@ const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-// app.set('views', path.join(__dirname, 'views')) 
+// app.set('views', path.join(__dirname, 'views'))
+
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res) {
@@ -50,16 +51,20 @@ app.post("/result", function(req, res) {
     rate = 5.90;
   }
 
-  res.render("calculator", {thePackage: mailType});
+  // res.render("calculator", {
+  //   thePackage: mailType
+  // });
   // res.render("calculator", {
   //   theWeight: weight
   // });
-  // res.render("calculator", {
-  //   theRate: rate
-  // });
+  res.render("calculator", {
+    theRate: rate.toFixed(2),
+    theWeight: weight,
+    thePackage: mailType
+  });
   // res.send("Package Type: " + mailType + " Weight: " + weight + " oz. " + "Rate: " + rate.toFixed(2));
 });
-var port = process.env.PORT || 3000 ;
+var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log("Running on port 3000");
 });
